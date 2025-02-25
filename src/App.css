@@ -7,66 +7,21 @@
 
 .input-sub-container {
   display: flex;
-  flex-direction: row;
-  gap: 30px;
+  flex-direction: column;
   flex-wrap: wrap;
-}
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  color: #333;
-  background-color: #e6f2fa;
-  border: none;
-  border-bottom: 1px solid #1884ff;
-  border-left: 1px solid #1884ff;
-  box-shadow: none;
-  transition: all 0.3s ease;
+  background: #fff;
+  text-align: left;
 }
 
-.services-container{
-  display: flex;
-  flex-direction: column;
+.input-sub-container p {
+  margin-bottom: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.services-container {
   justify-content: center;
   gap: 30px;
-}
-
-input{
-    width: 85%;
-  padding: 10px;
-  font-size: 14px;
-  color: #333;
-  background-color: #e6f2fa;
-  border: none;
-  border-bottom: 1px solid #1884ff;
-  border-left: 1px solid #1884ff;
-  box-shadow: none;
-  transition: all 0.3s ease;
-  margin-top: 5px;
-  display: flex;
-}
-
-input:focus, .input:focus{
-  border-color: #1884ff;
-  box-shadow: 0 0 7px rgba(24, 132, 255, 0.5);
-  outline: none;
-}
-
-input::placeholder {
-  color: #b2afaf;
-  font-style: italic;
-  font-weight: 500;
-}
-
-input:required {
-  border-left: 4px solid #dc3545;
-}
-
-input:disabled {
-  background-color: #e9ecef;
-  border-color: #ced4da;
-  color: #6c757d;
-  cursor: not-allowed;
 }
 
 .input-container {
@@ -79,72 +34,35 @@ input:disabled {
   padding-left: 35px;
 }
 
-.input-container i {
-  position: absolute;
-  left: 10px;
-  color: #b6b6b6;
-  font-size: 18px;
-}
-
-.input-error {
-  border-color: #dc3545;
-}
-
-.error-message {
-  color: #dc3545;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.service-container {
-  margin: 0 30px;
-}
-
 .sub-heading {
-  color: #0f4666;
+  color: #fff;
 }
 
 .heading {
   text-align: left;
   margin: 0%;
 }
-h1 {
-  color: #0f4666;
-  text-decoration: underline;
-}
-
-.buttons {
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-}
 
 .login-container {
   display: flex;
-  align-items: center;
   border: #0f4666 2px solid;
   background: #0f4666;
   align-items: center;
   justify-content: center;
   width: 90%;
 }
+
 .login-img {
   background: #fff;
 }
+
 .login-form {
   height: 100%;
   width: 100%;
 }
 
-.remove-service-btn {
-  margin-top: 3px;
-  border-radius: 50px;
-  height: 40px;
-  width: 40px;
-}
-
-.service-row{
-      display: flex;
+.service-row {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
@@ -152,7 +70,7 @@ h1 {
 .service-input-container {
   position: relative;
   overflow: visible;
-    display: flex;
+  display: flex;
   flex-direction: column;
   gap: 15px;
 }
@@ -182,22 +100,23 @@ h1 {
   transform: translateY(40px);
 }
 
-.service-container{
+.service-container {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-.service-container h3{
-align-items: flex-end;
-text-align: end;
-margin: 0%;
+.service-container h3 {
+  align-items: flex-end;
+  text-align: end;
+  margin: 0%;
 }
 
 @media (max-width: 768px) {
   .input-sub-container {
     gap: 20px;
   }
+
   .buttons {
     gap: 20px;
   }
@@ -208,6 +127,7 @@ margin: 0%;
     font-size: 28px;
     margin: 0;
   }
+
   h2 {
     margin: 0;
     font-size: 22px;
@@ -221,12 +141,8 @@ margin: 0%;
     padding-left: 10px;
     width: 100%;
   }
+
   input {
-    font-size: 12px;
-    padding: 8px;
-    width: 97%;
-  }
-  .input {
     font-size: 12px;
     padding: 8px;
     width: 97%;
@@ -239,19 +155,23 @@ margin: 0%;
 
   .remove-service-btn {
     padding: 8px;
-    font-size: 14px;
+    font-size: 16px;
   }
+
   .service-container {
     margin: 0 10px;
   }
+
   .input-sub-container {
     gap: 10px;
   }
 }
+
 .login-form input {
   background: #0f4666 !important;
   color: #fff;
 }
+
 .login-input {
   background: #0f4666 !important;
   width: 85%;
@@ -264,7 +184,6 @@ margin: 0%;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -273,6 +192,7 @@ margin: 0%;
   flex-direction: column;
   overflow: hidden;
 }
+
 .invoice-preview {
   background: white;
   overflow-y: auto;
@@ -319,11 +239,17 @@ margin: 0%;
 }
 
 .invoice-type-dropdown:hover {
-  border-color: #1884ff;
+  border-color: #7a8aa8;
 }
 
 .invoice-type-dropdown:focus {
   outline: none;
-  border-color: #0960c4;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-color: #2a3441;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    flex-direction: column;
+  }
 }

@@ -1,37 +1,25 @@
-/* Invoice.css */
-
-/* .invoice-container {
-  font-family: Arial, sans-serif;
-  margin: 0 auto;
-  width: 80%;
-  border: 1px solid #b6b6b6;
-  background-color: #f9f9f9;
-} */
-
 .invoice-holder {
   overflow: auto;
 }
 
-.invoice-header {
+/* .invoice-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 10px;
   background: #0f4666;
   height: 126px;
-  padding: 7px;
   gap: 25px;
-}
+} */
 
 .header-left {
   display: flex;
   flex-direction: column;
-  align-items: left;
 }
 
 .header-left h1 {
   font-size: 20px;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
   text-decoration: none;
   text-align: left;
@@ -46,7 +34,7 @@
 .header-right p {
   margin: 2px 0;
   font-size: 13px;
-  color: #ffffff;
+  color: #fff;
   text-align: left;
 }
 
@@ -54,17 +42,13 @@
   padding: 0 20px 20px 20px;
 }
 
-/* .invoice-to {
+.invoice-to-content {
   display: flex;
-  margin: 0 0 20px 0;
-} */
-
-.invoice-to-content{
-    display: flex;
   justify-content: space-between;
   margin: 0 0 20px 0;
   align-items: flex-end;
 }
+
 .invoice-to h2 {
   margin: 0;
   font-size: 16px;
@@ -76,32 +60,33 @@
   width: 273px;
   height: 154px;
   font-size: 17px;
-  font-weight: semibold;
+  font-weight: 500;
   text-align: left;
   padding-left: 9px;
   margin-left: 25px;
 }
 
-.invoice-name{
+.invoice-name {
   position: absolute;
   top: 184px;
   right: 0;
 }
 
-.invoice-quotation{
+.invoice-quotation {
   display: flex;
   align-items: center;
 }
-.invoice-type-text{
-    position: relative;
-    top: 40px;
-    left: 559px;
-    z-index: 4;
-    font-weight: 700;
-    font-size: 35px;
-    color: white;
-    width: 12rem;
-    margin: 0;
+
+.invoice-type-text {
+  position: relative;
+  top: 40px;
+  left: 559px;
+  z-index: 4;
+  font-weight: 700;
+  font-size: 35px;
+  color: white;
+  width: 12rem;
+  margin: 0;
 }
 
 .invoice-to-left p {
@@ -111,19 +96,18 @@
 }
 
 .invoice-to-right {
-  text-align: right;
+  text-align: left;
   font-weight: 600;
   background: #e6f2fa;
   width: 238px;
   height: 71px;
-  text-align: left;
   padding-left: 10px;
 }
 
 .invoice-info p {
   margin: 5px 0;
   font-size: 14px;
-  font-weight: semibold;
+  font-weight: 500;
 }
 
 .invoice-table {
@@ -146,7 +130,6 @@
 }
 
 .invoice-summary {
-  /* margin: 20px 0; */
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -163,7 +146,7 @@
   font-weight: bold;
   font-size: 24px;
   background: #1884ff;
-  color: #ffffff;
+  color: #fff;
   height: 42px;
   width: 185px;
   padding: 5px 0 0 10px;
@@ -182,6 +165,7 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
 .footer-left p {
   font-weight: bold;
   font-size: 20px;
@@ -191,10 +175,6 @@
 .footer-left ul {
   padding-left: 20px;
   margin-top: -2px;
-}
-.footer-left ul li {
-  display: flex;
-  gap: 5px;
 }
 
 .footer-left li {
@@ -206,10 +186,15 @@
   font-weight: 600;
 }
 
+.footer-left ul li {
+  display: flex;
+  gap: 5px;
+}
+
 .footer-thanks p {
   font-size: 20px;
   font-weight: 600;
-  color: #ffffff;
+  color: #fff;
   margin: 0;
   padding: 6px 0;
 }
@@ -223,4 +208,262 @@
 .emergency-logo {
   width: 86px;
   height: auto;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr; /* Adds a row for the header */
+  grid-template-columns: 300px 4fr;
+  gap: 40px;
+  color: #c7c7c7;
+  background: #0f1827;
+}
+
+/* Header Section */
+.invoice-header {
+  grid-column: 1 / -1; /* Makes header span the entire width */
+  background: #303642;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  height: 50px;
+}
+
+/* Company Header Styling */
+.company-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.company-header img {
+  height: 60px;
+}
+
+.company-header h1 {
+  font-size: 24px;
+  color: #0f1827;
+  font-weight: bold;
+}
+
+/* Adjustments to existing sections */
+.right-section {
+  display: grid;
+  grid-template-rows: 490px 1fr; /* Keeps existing layout */
+  gap: 40px;
+  height: 100%;
+}
+
+.customer-details,
+.services,
+.summary {
+  background: #303642;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+}
+
+input,
+button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.service-container input {
+  flex: 2; /* Make input take equal space */
+}
+
+.input-container input,
+.service-input-container input {
+  width: 100%;
+  background: #303642;
+  border: 1px solid #afb0ab;
+  color: #c7c7c7;
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-container input:focus,
+.service-input-container input:focus {
+  border-color: #c7c7c7;
+  box-shadow: 0 0 5px rgba(199, 199, 199, 0.7);
+}
+
+.input-container input:active,
+.service-input-container input:active {
+  border-color: #c7c7c7;
+}
+
+.service-container {
+  display: flex;
+  align-items: center; /* Align text and input vertically */
+
+  /* Add spacing between elements */
+}
+
+.service-container h3 {
+  flex: 1;
+  text-align: left; /* Allow equal width distribution */
+}
+
+.icon-button {
+  border: none;
+  color: #afb0ab;
+  font-size: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-button:hover {
+  background: #f3f3f3;
+}
+
+.icon-button:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+  background: #bebebe;
+  border: #bebebe;
+}
+
+.arc-buttons .icon-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid #ccc;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.arc-buttons .icon-button:hover {
+  transform: scale(1.1);
+}
+
+.arc-buttons .icon-button:active {
+  transform: translateY(3px);
+}
+
+.icon-button::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #303642;
+  color: #c7c7c7;
+  padding: 3px 8px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  font-size: 0.8rem;
+}
+
+.icon-button:hover::after {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.invoice-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.service-section {
+  background: #303642;
+  padding: 40px;
+  border-radius: 10px;
+  height: 400px;
+}
+
+.navigation-buttons button {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.button-container {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #fff;
+  color: #0f1827;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: background 0.3s ease-in-out;
+}
+
+.main-button:hover {
+  background-color: #bebebe;
+}
+
+.main-button:active {
+  transform: translateY(5px);
+}
+
+.arc-buttons {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.arc-buttons.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.arc-buttons.show .icon-button:nth-child(1) {
+  transform: translate(-75px, -50px);
+}
+
+.arc-buttons.show .icon-button:nth-child(2) {
+  transform: translate(-20px, -75px);
+}
+
+.arc-buttons.show .icon-button:nth-child(3) {
+  transform: translate(35px, -50px);
+}
+
+.label-input h3 {
+  margin-bottom: 0;
 }
