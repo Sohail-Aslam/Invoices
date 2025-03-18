@@ -213,7 +213,8 @@
   display: flex;
   flex-direction: column; */
   background: white;
-  min-width: 210mm;
+
+  /* min-width: 210mm; */
 }
 
 .img1 {

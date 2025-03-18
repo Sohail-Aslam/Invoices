@@ -517,7 +517,7 @@ function Invoice() {
       {showPreview && (
         <div className="modal-overlay">
           <div
-          // style={{ height: "60%", overflow: "auto" }}
+          style={{ height: "70%", overflow: "auto" }}
           >
             <div className="invoice-preview" ref={targetRef}>
               <div className="invoice-container">
