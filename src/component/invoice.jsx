@@ -2,7 +2,6 @@
 import { useState, useEffect, useRef } from "react";
 import { usePDF } from "react-to-pdf";
 import "../component/invoice.css";
-import "../component/invoice.css";
 import { IoEyeSharp } from "react-icons/io5";
 import { IoEyeOffSharp } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
@@ -111,51 +110,51 @@ function Invoice() {
     setIsServiceEdited(true);
   };
 
-const handleAddService = () => {
-  if (services.length >= 14) {
-    alert("You can add only 14 services.");
-    return;
-  }
+  const handleAddService = () => {
+    if (services.length >= 14) {
+      alert("You can add only 14 services.");
+      return;
+    }
 
-  const currentService = services[serviceIndex];
-  const newErrors = { ...errors }; // Keep previous errors
+    const currentService = services[serviceIndex];
+    const newErrors = { ...errors }; // Keep previous errors
 
-  // Validate only the last added service
-  const indexErrors = {};
-  if (!currentService.description)
-    indexErrors.description = "Description is required.";
-  if (!currentService.unitPrice)
-    indexErrors.unitPrice = "Unit Price is required.";
-  if (!currentService.quantity) indexErrors.quantity = "Quantity is required.";
+    // Validate only the last added service
+    const indexErrors = {};
+    if (!currentService.description)
+      indexErrors.description = "Description is required.";
+    if (!currentService.unitPrice)
+      indexErrors.unitPrice = "Unit Price is required.";
+    if (!currentService.quantity)
+      indexErrors.quantity = "Quantity is required.";
 
-  // If there are errors, assign them to the current index
-  if (Object.keys(indexErrors).length > 0) {
-    newErrors[serviceIndex] = indexErrors;
+    // If there are errors, assign them to the current index
+    if (Object.keys(indexErrors).length > 0) {
+      newErrors[serviceIndex] = indexErrors;
+      setErrors(newErrors);
+      return;
+    }
+
+    // Clear errors for the current index after successful validation
+    delete newErrors[serviceIndex];
     setErrors(newErrors);
-    return;
-  }
 
-  // Clear errors for the current index after successful validation
-  delete newErrors[serviceIndex];
-  setErrors(newErrors);
+    if (serviceIndex === services.length - 1) {
+      // Add a new service if we are on the last one
+      setServices((prev) => [
+        ...prev,
+        { description: "", unitPrice: "", quantity: "", discount: "" },
+      ]);
+      setServiceIndex(services.length);
+    } else {
+      // Editing an existing service
+      const updatedServices = [...services];
+      updatedServices[serviceIndex] = currentService;
+      setServices(updatedServices);
+    }
 
-  if (serviceIndex === services.length - 1) {
-    // Add a new service if we are on the last one
-    setServices((prev) => [
-      ...prev,
-      { description: "", unitPrice: "", quantity: "", discount: "" },
-    ]);
-    setServiceIndex(services.length);
-  } else {
-    // Editing an existing service
-    const updatedServices = [...services];
-    updatedServices[serviceIndex] = currentService;
-    setServices(updatedServices);
-  }
-
-  setIsServiceEdited(false);
-};
-
+    setIsServiceEdited(false);
+  };
 
   const handleRemoveService = () => {
     if (services.length > 1) {
@@ -386,7 +385,7 @@ const handleAddService = () => {
                 gap: "20px",
                 position: "absolute",
                 alignItems: "center",
-                top:'400px'
+                top: "400px",
               }}
             >
               <Tippy
@@ -517,272 +516,299 @@ const handleAddService = () => {
       {/* Full-screen preview with blurred background */}
       {showPreview && (
         <div className="modal-overlay">
-          <div className="invoice-preview" ref={targetRef}>
-            <div className="upper-border"></div>
-            <div className="invoice-container">
-              <h2
-                style={{
-                  fontSize: "36px",
-                  position: "absolute",
-                  right: "40px",
-                  top: "-10px",
-                }}
-              >
-                {invoiceType}
-              </h2>
-              <header className="invoice-preview-header">
-                <div className="header-left">
-                  <div>
-                    <img src="public/headerLogo (1).png" alt="Company Logo" />
-                    <h1>
-                      CAR A I D AUTO MOBILE REPAIR <br /> SERVICE LLC
-                    </h1>
-                  </div>
-                  <div className="header-right">
-                    <p>
-                      {" "}
-                      <strong>Mobile:</strong> 0559521526, 0551729296
-                    </p>
-                    <p>
-                      <strong>Address:</strong> Dubai, Al Quoz Industrial <br />{" "}
-                      Area 1, UAE
-                    </p>
-                  </div>
-                </div>
-                <div className="header-right">
-                  <p>
-                    <strong>Manager:</strong> Mr Sheraz Hassan
-                  </p>
-                  <p>
-                    {" "}
-                    <strong>TRN:</strong> 104676144900003
-                  </p>
-                  <p>
-                    <strong>Email:</strong> Caraid321@gmail.com
-                  </p>
-                </div>
-              </header>
+          <div
+          // style={{ height: "60%", overflow: "auto" }}
+          >
+            <div className="invoice-preview" ref={targetRef}>
+              <div className="invoice-container">
+                <img className="img2" src="public/Group83-1.png" alt="" />
 
-              <section className="invoice-to">
-                <div className="invoice-to-left">
-                  <h2>Invoice To:</h2>
-                  <input
-                    className="preview-inputs"
-                    type="text"
-                    value={customer.name}
-                    onChange={(e) =>
-                      handleCustomerChange("name", e.target.value)
-                    }
-                    placeholder="Name"
-                  />
-
-                  <input
-                    className="preview-inputs"
-                    type="text"
-                    value={customer.carReg}
-                    onChange={(e) =>
-                      handleCustomerChange("carReg", e.target.value)
-                    }
-                    placeholder="Car Reg. #"
-                  />
-                  <input
-                    className="preview-inputs"
-                    type="text"
-                    value={customer.carName}
-                    onChange={(e) =>
-                      handleCustomerChange("carName", e.target.value)
-                    }
-                    placeholder="Car Name"
-                  />
-                </div>
-                <div className="invoice-to-center">
-                  <h2>Contact</h2>
-                  <input
-                    maxlength="9"
-                    className="preview-inputs"
-                    type="text"
-                    value={customer.contact}
-                    onChange={(e) =>
-                      handleCustomerChange("contact", e.target.value)
-                    }
-                    placeholder="Contact"
-                  />
-                  <input
-                    className="preview-inputs"
-                    type="email"
-                    value={customer.email}
-                    onChange={(e) =>
-                      handleCustomerChange("email", e.target.value)
-                    }
-                    placeholder="Email"
-                  />
-                  <input
-                    className="preview-inputs"
-                    type="text"
-                    value={customer.trn}
-                    onChange={(e) =>
-                      handleCustomerChange("trn", e.target.value)
-                    }
-                    placeholder="123456789012345"
-                  />
-                </div>
-
-                <div className="invoice-to-right">
-                  <h2>Details</h2>
-                  <div className="invoice-info">
-                    <p>Date: {invoice.date}</p>
-                    <p>Invoice No.: {invoice.number}</p>
-                  </div>
-                </div>
-              </section>
-
-              <table className="invoice-table">
-                <thead>
-                  <tr>
-                    <th className="table-heading">SL.</th>
-                    <th className="table-heading">Description</th>
-                    <th className="table-heading">QTY</th>
-                    <th className="table-heading">Price</th>
-                    <th className="table-heading">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {services.map((service, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td style={{ width: "50%" }}>
-                        <input
-                          className="preview-inputs"
-                          type="text"
-                          value={service.description}
-                          onChange={(e) =>
-                            handleServiceChange(
-                              index,
-                              "description",
-                              e.target.value
-                            )
-                          }
-                          style={{
-                            border: errors[index]?.description
-                              ? "2px solid red"
-                              : "",
-                          }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="preview-inputs"
-                          type="number"
-                          value={service.quantity}
-                          onChange={(e) =>
-                            handleServiceChange(
-                              index,
-                              "quantity",
-                              e.target.value
-                            )
-                          }
-                          style={{
-                            border: errors[index]?.quantity
-                              ? "2px solid red"
-                              : "",
-                          }}
-                        />
-                      </td>
-                      <td>
-                        <input
-                          className="preview-inputs"
-                          type="number"
-                          value={service.unitPrice}
-                          onChange={(e) =>
-                            handleServiceChange(
-                              index,
-                              "unitPrice",
-                              e.target.value
-                            )
-                          }
-                          style={{
-                            border: errors[index]?.unitPrice
-                              ? "2px solid red"
-                              : "",
-                          }}
-                        />
-                      </td>
-                      <td>
-                        {(
-                          (parseFloat(service.unitPrice) || 0) *
-                          (parseFloat(service.quantity) || 0)
-                        ).toFixed(2)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-
-              <section className="invoice-summary">
-                <div style={{ display: "flex", gap: "50px" }}>
-                  <div className="footer-right">
-                    <h3 style={{ marginBottom: "0", marginTop: "0" }}>
-                      Customer message
-                    </h3>
-                    <p>Hello!</p>
-                    <p>Thank you for choosing Car Aid Auto Repair Dubai!</p>
-                  </div>
-
-                  <div style={{ borderBottom: "3px solid #000" }}>
-                    <div style={{ display: "flex", gap: "185px" }}>
-                      <p>Subtotal:</p>
-                      <p>${calculateSubtotal().toFixed(2)}</p>
+                <div
+                  style={{
+                    // width: "190mm",
+                    position: "relative",
+                    top: "-75px",
+                    // left: "27px",
+                    padding: "0 40px 0 40px",
+                    maxHeight: "calc(296mm - 403px)",
+                  }}
+                >
+                  <h2
+                    style={{
+                      fontSize: "36px",
+                      position: "absolute",
+                      right: "40px",
+                      top: "-10px",
+                    }}
+                  >
+                    {invoiceType}
+                  </h2>
+                  <header className="invoice-preview-header">
+                    <div className="header-left">
+                      <div>
+                        <img src="public/2.png" alt="Company Logo" />
+                        <h1>
+                          CAR A I D AUTO MOBILE REPAIR <br /> SERVICE LLC
+                        </h1>
+                      </div>
+                      <div className="header-right">
+                        <p>
+                          {" "}
+                          <strong>Mobile:</strong> 0559521526, 0551729296
+                        </p>
+                        <p>
+                          <strong>Address:</strong> Dubai, Al Quoz Industrial{" "}
+                          <br /> Area 1, UAE
+                        </p>
+                      </div>
                     </div>
-
-                    <div style={{ display: "flex", gap: "180px" }}>
-                      {" "}
-                      <p>Discount:</p>
+                    <div className="header-right">
                       <p>
-                        ${(calculateTotal() - calculateSubtotal()).toFixed(2)}
+                        <strong>Manager:</strong> Mr Sheraz Hassan
+                      </p>
+                      <p>
+                        {" "}
+                        <strong>TRN:</strong> 104676144900003
+                      </p>
+                      <p>
+                        <strong>Email:</strong> Caraid321@gmail.com
                       </p>
                     </div>
+                  </header>
 
-                    <div
-                      style={{ display: "flex", gap: "170px" }}
-                      className="total"
-                    >
-                      <p>Total:</p>
-                      <p>${calculateTotal().toFixed(2)}</p>
+                  <section className="invoice-to">
+                    <div className="invoice-to-left">
+                      <h2>Invoice To:</h2>
+                      <input
+                        className="preview-inputs"
+                        type="text"
+                        value={customer.name}
+                        onChange={(e) =>
+                          handleCustomerChange("name", e.target.value)
+                        }
+                        placeholder="Name"
+                      />
+
+                      <input
+                        className="preview-inputs"
+                        type="text"
+                        value={customer.carReg}
+                        onChange={(e) =>
+                          handleCustomerChange("carReg", e.target.value)
+                        }
+                        placeholder="Car Reg. #"
+                      />
+                      <input
+                        className="preview-inputs"
+                        type="text"
+                        value={customer.carName}
+                        onChange={(e) =>
+                          handleCustomerChange("carName", e.target.value)
+                        }
+                        placeholder="Car Name"
+                      />
+                    </div>
+                    <div className="invoice-to-center">
+                      <h2>Contact</h2>
+                      <input
+                        maxlength="9"
+                        className="preview-inputs"
+                        type="text"
+                        value={customer.contact}
+                        onChange={(e) =>
+                          handleCustomerChange("contact", e.target.value)
+                        }
+                        placeholder="Contact"
+                      />
+                      <input
+                        className="preview-inputs"
+                        type="email"
+                        value={customer.email}
+                        onChange={(e) =>
+                          handleCustomerChange("email", e.target.value)
+                        }
+                        placeholder="Email"
+                      />
+                      <input
+                        className="preview-inputs"
+                        type="text"
+                        value={customer.trn}
+                        onChange={(e) =>
+                          handleCustomerChange("trn", e.target.value)
+                        }
+                        placeholder="123456789012345"
+                      />
+                    </div>
+
+                    <div className="invoice-to-right">
+                      <h2>Details</h2>
+                      <div className="invoice-info">
+                        <p>Date: {invoice.date}</p>
+                        <p>Invoice No.: {invoice.number}</p>
+                      </div>
+                    </div>
+                  </section>
+
+                  <table className="invoice-table">
+                    <thead>
+                      <tr>
+                        <th className="table-heading">SL.</th>
+                        <th className="table-heading">Description</th>
+                        <th className="table-heading">QTY</th>
+                        <th className="table-heading">Price</th>
+                        <th className="table-heading">Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {services.map((service, index) => (
+                        <tr key={index}>
+                          <td style={{ textAlign: "center" }}>{index + 1}</td>
+                          <td style={{ width: "50%" }}>
+                            <input
+                              className="preview-inputs"
+                              type="text"
+                              value={service.description}
+                              onChange={(e) =>
+                                handleServiceChange(
+                                  index,
+                                  "description",
+                                  e.target.value
+                                )
+                              }
+                              style={{
+                                border: errors[index]?.description
+                                  ? "2px solid red"
+                                  : "",
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="preview-inputs"
+                              type="number"
+                              value={service.quantity}
+                              onChange={(e) =>
+                                handleServiceChange(
+                                  index,
+                                  "quantity",
+                                  e.target.value
+                                )
+                              }
+                              style={{
+                                border: errors[index]?.quantity
+                                  ? "2px solid red"
+                                  : "",
+                              }}
+                            />
+                          </td>
+                          <td>
+                            <input
+                              className="preview-inputs"
+                              type="number"
+                              value={service.unitPrice}
+                              onChange={(e) =>
+                                handleServiceChange(
+                                  index,
+                                  "unitPrice",
+                                  e.target.value
+                                )
+                              }
+                              style={{
+                                border: errors[index]?.unitPrice
+                                  ? "2px solid red"
+                                  : "",
+                              }}
+                            />
+                          </td>
+                          <td style={{ textAlign: "center" }}>
+                            {(
+                              (parseFloat(service.unitPrice) || 0) *
+                              (parseFloat(service.quantity) || 0)
+                            ).toFixed(2)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                  <section className="invoice-summary">
+                    <div style={{ display: "flex", gap: "50px" }}>
+                      <div className="footer-right">
+                        <h3 style={{ marginBottom: "0", marginTop: "0" }}>
+                          Customer message
+                        </h3>
+                        <p>Hello!</p>
+                        <p>Thank you for choosing Car Aid Auto Repair Dubai!</p>
+                      </div>
+
+                      <div style={{ borderBottom: "3px solid #000" }}>
+                        <div style={{ display: "flex", gap: "185px" }}>
+                          <p>Subtotal:</p>
+                          <p>${calculateSubtotal().toFixed(2)}</p>
+                        </div>
+
+                        <div style={{ display: "flex", gap: "180px" }}>
+                          {" "}
+                          <p>Discount:</p>
+                          <p>
+                            $
+                            {(calculateTotal() - calculateSubtotal()).toFixed(
+                              2
+                            )}
+                          </p>
+                        </div>
+
+                        <div
+                          style={{ display: "flex", gap: "170px" }}
+                          className="total"
+                        >
+                          <p>Total:</p>
+                          <p>${calculateTotal().toFixed(2)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <footer
+                  style={{
+                    width: "190mm",
+                    position: "relative",
+                    top: "90px",
+                    left: "25px",
+                  }}
+                  className="invoice-footer"
+                >
+                  <h3>Services we Provide</h3>
+                  <div className="footer-services">
+                    <div className="service-column">
+                      <p>
+                        <FaCheckCircle /> Auto Mechanical Repair & Maintenance
+                      </p>
+                      <p>
+                        <FaCheckCircle /> Auto Electrical Repair & Maintenance
+                      </p>
+                    </div>
+                    <div className="service-column">
+                      <p>
+                        <FaCheckCircle /> Auto Body Shop & Many More Services
+                      </p>
+                      <p>
+                        <FaCheckCircle /> Auto Mobile Service 24/7 Doorstep
+                      </p>
+                    </div>
+                    <div className="service-image">
+                      <img
+                        src="24-7Logo.png"
+                        alt="24/7 Emergency Services"
+                        className="emergency-logo"
+                      />
                     </div>
                   </div>
-                </div>
-              </section>
-
-              <footer className="invoice-footer">
-                  <h3>Services we Provide</h3>
-                <div className="footer-services">
-                  <div className="service-column">
-                    <p>
-                      <FaCheckCircle /> Auto Mechanical Repair & Maintenance
-                    </p>
-                    <p>
-                      <FaCheckCircle /> Auto Electrical Repair & Maintenance
-                    </p>
-                  </div>
-                  <div className="service-column">
-                    <p>
-                      <FaCheckCircle /> Auto Body Shop & Many More Services
-                    </p>
-                    <p>
-                      <FaCheckCircle /> Auto Mobile Service 24/7 Doorstep
-                    </p>
-                  </div>
-                  <div className="service-image">
-                    <img
-                      src="24-7Logo.png"
-                      alt="24/7 Emergency Services"
-                      className="emergency-logo"
-                    />
-                  </div>
-                </div>
-              </footer>
+                </footer>
+                <img className="img2" src="public/Group84-2.png" alt="" />
+              </div>
+              {/* </div> */}
             </div>
-            <div className="bottom-border"></div>
           </div>
           <div className="fab-container">
             {/* Expandable Buttons */}

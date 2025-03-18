@@ -180,7 +180,7 @@
 }
 
 .modal-overlay {
-  position: fixed;
+  /* position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -191,18 +191,37 @@
   backdrop-filter: blur(5px);
   z-index: 1000;
   flex-direction: column;
-  overflow: hidden;
+  overflow: hidden; */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .invoice-preview {
-  background: white;
-  overflow-y: auto;
+  /* background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  width: 210mm;
-  height: 296mm;
+  max-width: 210mm;
+  max-height: 296mm;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
+  background: white;
+  min-width: 210mm;
+}
+
+.img1 {
+  width: 210mm;
+}
+
+.img2 {
+  width: 210mm;
 }
 
 .modal-overlay .buttons {
@@ -315,10 +334,16 @@
 }
 
 .invoice-container {
-  padding: 60px 40px 40px;
+  /* padding: 60px 40px 40px;
   color: #0f1827;
   max-height: 100%;
-  overflow: visible;
+  overflow: auto; */
+  max-width: 210mm;
+  min-height: 296mm;
+  color: #0f1827;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .service-section {

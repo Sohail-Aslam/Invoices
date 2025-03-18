@@ -141,6 +141,13 @@
   font-size: 24px;
 }
 
+
+
+.invoice-footer {
+  position: absolute;
+  bottom: 270px;
+  left: 278px;
+}
 .invoice-footer h3 {
   text-align: left;
   margin: 0;
@@ -240,6 +247,8 @@ input {
   gap: 8px;
   font-size: 16px;
   margin: 0;
+      text-align: left;
+
 }
 
 .service-image img {
