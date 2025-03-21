@@ -54,7 +54,7 @@ function Invoice() {
   }, []);
 
   const [showPreview, setShowPreview] = useState(false);
-  const { toPDF, targetRef } = usePDF({ filename: "Invoice.pdf" });
+const { toPDF, targetRef } = usePDF({ filename: `${invoice.number}.pdf` });
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -68,19 +68,46 @@ function Invoice() {
     setCustomer((prev) => ({ ...prev, [field]: value }));
   };
 
-  const shareOnWhatsApp = () => {
-    const message = encodeURIComponent("Check out this invoice!");
-    const appUrl = `whatsapp://send?text=${message}`;
-    const webUrl = `https://web.whatsapp.com/send?text=${message}`;
+const shareOnWhatsApp = async () => {
+  try {
+    // Generate PDF Blob
+    const pdfBlob = await toPDF();
+    const file = new File([pdfBlob], `${invoice.number}.pdf`, {
+      type: "application/pdf",
+    });
 
-    // Try opening the WhatsApp app
+    // Check if Web Share API is supported (for mobile apps)
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        title: "Invoice",
+        text: "Check out this invoice!",
+        files: [file],
+      });
+      return;
+    }
+
+    // Create a temporary download link for desktop users
+    const blobUrl = URL.createObjectURL(file);
+    const a = document.createElement("a");
+    a.href = blobUrl;
+    a.download = `${invoice.number}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    // Try opening WhatsApp App (Mobile & Desktop)
+    const appUrl = "whatsapp://send";
     window.location.href = appUrl;
 
-    // Fallback to WhatsApp Web after a slight delay if the app is not installed
+    // Fallback to WhatsApp Web after a short delay if the app is not installed
     setTimeout(() => {
-      window.open(webUrl, "_blank");
-    }, 500);
-  };
+      window.open("https://web.whatsapp.com/", "_blank");
+    }, 1000);
+  } catch (error) {
+    console.error("Error sharing invoice on WhatsApp:", error);
+  }
+};
+
 
   // Check if any field in services is empty
   const isAnyFieldEmpty = services.some(
@@ -214,7 +241,9 @@ function Invoice() {
         <Tilt options={defaultOptions}>
           <div className="company-header">
             <img src="public/headerLogo (1).png" alt="Company Logo" />
-            <h1 style={{ color: "white" }}>Car A I D Repair Service Dubai</h1>
+            <h1 style={{ color: "white" }}>
+              Car A I D Repair Service Garage Dubai
+           </h1>
           </div>
         </Tilt>
       </header>
@@ -516,9 +545,7 @@ function Invoice() {
       {/* Full-screen preview with blurred background */}
       {showPreview && (
         <div className="modal-overlay">
-          <div
-          style={{ height: "70%", overflow: "auto" }}
-          >
+          <div style={{ height: "70%", overflow: "auto" }}>
             <div className="invoice-preview" ref={targetRef}>
               <div className="invoice-container">
                 <img className="img2" src="public/Group83-1.png" alt="" />
@@ -548,7 +575,8 @@ function Invoice() {
                       <div>
                         <img src="public/2.png" alt="Company Logo" />
                         <h1>
-                          CAR A I D AUTO MOBILE REPAIR <br /> SERVICE LLC
+                          CAR A I D AUTO MOBILE REPAIR GARAGE
+                          <br /> SERVICE LLC
                         </h1>
                       </div>
                       <div className="header-right">
@@ -644,7 +672,7 @@ function Invoice() {
                       <h2>Details</h2>
                       <div className="invoice-info">
                         <p>Date: {invoice.date}</p>
-                        <p>Invoice No.: {invoice.number}</p>
+                        <p>Invoice No: {invoice.number}</p>
                       </div>
                     </div>
                   </section>
@@ -734,36 +762,55 @@ function Invoice() {
                   <section className="invoice-summary">
                     <div style={{ display: "flex", gap: "50px" }}>
                       <div className="footer-right">
-                        <h3 style={{ marginBottom: "0", marginTop: "0" }}>
+                        {/* <h3 style={{ marginBottom: "0", marginTop: "0" }}>
                           Customer message
                         </h3>
-                        <p>Hello!</p>
-                        <p>Thank you for choosing Car Aid Auto Repair Dubai!</p>
+                        <p>Hello!</p> */}
+                        <p>Thank you for choosing Car AID Auto Repair <br /> Garage Dubai!</p>
                       </div>
 
-                      <div style={{ borderBottom: "3px solid #000" }}>
-                        <div style={{ display: "flex", gap: "185px" }}>
+                      <div
+                        style={{
+                          borderBottom: "3px solid #000",
+                          paddingBottom: "10px",
+                          width:'45%'
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            gap:'100px'
+                          }}
+                        >
                           <p>Subtotal:</p>
-                          <p>${calculateSubtotal().toFixed(2)}</p>
+                          <p>AED {calculateSubtotal().toFixed(2)}</p>
                         </div>
 
-                        <div style={{ display: "flex", gap: "180px" }}>
-                          {" "}
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
                           <p>Discount:</p>
                           <p>
-                            $
+                            AED{" "}
                             {(calculateTotal() - calculateSubtotal()).toFixed(
                               2
                             )}
                           </p>
                         </div>
 
-                        <div
-                          style={{ display: "flex", gap: "170px" }}
-                          className="total"
+                        <div className="total"
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            fontWeight: "bold",
+                          }}
                         >
                           <p>Total:</p>
-                          <p>${calculateTotal().toFixed(2)}</p>
+                          <p>AED {calculateTotal().toFixed(2)}</p>
                         </div>
                       </div>
                     </div>
