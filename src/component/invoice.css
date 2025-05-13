@@ -1,0 +1,291 @@
+.container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 300px 4fr;
+  gap: 40px;
+  color: #c7c7c7;
+  background: #0f1827;
+}
+
+.invoice-header {
+  grid-column: 1 / -1;
+  background: #303642;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  height: 50px;
+}
+
+.company-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.company-header img {
+  height: 60px;
+}
+
+.company-header h1 {
+  font-size: 24px;
+  color: #0f1827;
+  font-weight: bold;
+}
+
+.right-section {
+  display: grid;
+  grid-template-rows: 490px 1fr;
+  gap: 40px;
+  height: 100%;
+}
+
+.customer-details,
+.services,
+.summary {
+  background: #303642;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+  font-size: 16px;
+}
+
+.invoice-preview-header {
+  display: flex;
+  padding-bottom: 10px;
+  align-items: flex-end;
+  height: 166px;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.header-left h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.header-right p {
+  width: max-content;
+  margin: 2px 0;
+  font-size: 14px;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.invoice-to {
+  display: flex;
+  justify-content: space-between;
+  background: #f1f1f1;
+  color: #0f1827;
+  padding: 10px;
+}
+
+.invoice-to-left h2,
+.invoice-to-right h2,
+.invoice-to-center h2 {
+  font-size: 18px;
+  text-align: left;
+  margin: 0;
+}
+
+.invoice-info p {
+  margin: 0;
+  text-align: left;
+}
+
+.invoice-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.invoice-table th,
+.invoice-table td {
+  text-align: left;
+}
+
+.invoice-table tbody tr:nth-child(odd) {
+  background-color: #ffff;
+}
+
+.invoice-table tbody tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+
+.table-heading {
+  padding: 10px;
+  border-bottom: #ccc 1px solid;
+}
+
+.invoice-table th {
+  background: #f4f4f4;
+}
+
+.invoice-summary {
+  text-align: left;
+  margin-top: 20px;
+  color: #0f1827;
+}
+
+.invoice-summary p {
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.total {
+  font-size: 24px;
+}
+
+.invoice-footer {
+  position: absolute;
+  bottom: 270px;
+  left: 278px;
+}
+
+.invoice-footer h3 {
+  text-align: left;
+  margin: 0;
+}
+
+.footer-left ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-left ul li {
+  font-size: 14px;
+}
+
+.footer-right {
+  font-weight: bold;
+}
+
+input,
+button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+.service-container input {
+  flex: 2;
+}
+
+.input-container input,
+.service-input-container input {
+  width: 100%;
+  background: #303642;
+  border: 1px solid #afb0ab;
+  color: #c7c7c7;
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-container input:focus,
+.service-input-container input:focus {
+  border-color: #c7c7c7;
+  box-shadow: 0 0 5px rgba(199, 199, 199, 0.7);
+}
+
+.input-container input:active,
+.service-input-container input:active {
+  border-color: #c7c7c7;
+}
+
+.service-container {
+  display: flex;
+  align-items: center;
+}
+
+.service-container h3 {
+  flex: 1;
+  text-align: left;
+}
+
+.preview-inputs {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  height: 24px;
+}
+
+.footer-services {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-left: 20px;
+}
+
+.service-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service-column p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  margin: 0;
+  text-align: left;
+}
+
+.service-image img {
+  max-width: 100px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .label-input h3 {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .invoice-header h1 {
+    font-size: 18px;
+  }
+
+  .company-header {
+    gap: 0;
+  }
+}
+
+@media (max-width: 792px) {
+  .invoice-container {
+    display: none;
+  }
+
+  .invoice-preview {
+    width: 100px;
+    height: 100px;
+    color: #6a6e77;
+    background-image: url(../../public/images.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+  }
+}
