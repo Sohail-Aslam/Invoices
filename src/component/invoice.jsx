@@ -115,6 +115,11 @@ const shareOnWhatsApp = async () => {
       !service.description.trim() || !service.unitPrice || !service.quantity
   );
 
+const handleClearAll = () => {
+  window.location.reload();
+};
+
+
   const handleServiceChange = (index, field, value) => {
     const updatedServices = [...services];
     updatedServices[index] = { ...updatedServices[index], [field]: value };
@@ -207,7 +212,7 @@ const shareOnWhatsApp = async () => {
   };
 
   // Use the current service from services or the new empty service for adding
-  const currentService = services[serviceIndex] || service;
+  // const currentService = services[serviceIndex] || service;
 
   const calculateSubtotal = () => {
     return services.reduce((sum, service) => {
@@ -230,7 +235,16 @@ const shareOnWhatsApp = async () => {
   };
 
   //  if (!showPreview) return null;
+useEffect(() => {
+  const handleKeyDown = (e) => {
+    if (e.key === "Escape") {
+      setShowPreview(false);
+    }
+  };
 
+  window.addEventListener("keydown", handleKeyDown);
+  return () => window.removeEventListener("keydown", handleKeyDown);
+}, []);
   const togglePreview = () => {
     setShowPreview(!showPreview);
   };
@@ -243,7 +257,7 @@ const shareOnWhatsApp = async () => {
             <img src="public/headerLogo (1).png" alt="Company Logo" />
             <h1 style={{ color: "white" }}>
               Car A I D Repair Service Garage Dubai
-           </h1>
+            </h1>
           </div>
         </Tilt>
       </header>
@@ -337,6 +351,10 @@ const shareOnWhatsApp = async () => {
       </Tilt>
 
       <div className="services-container ">
+        <button className="clear-new-btn" onClick={handleClearAll}>
+          <span className="plus">+</span>
+          <span className="text">Create New</span>
+        </button>
         <div
           className="service-input-container right-section"
           options={defaultOptions}
@@ -639,7 +657,7 @@ const shareOnWhatsApp = async () => {
                     <div className="invoice-to-center">
                       <h2>Contact</h2>
                       <input
-                        maxlength="9"
+                        maxLength="9"
                         className="preview-inputs"
                         type="text"
                         value={customer.contact}
@@ -766,21 +784,24 @@ const shareOnWhatsApp = async () => {
                           Customer message
                         </h3>
                         <p>Hello!</p> */}
-                        <p>Thank you for choosing Car AID Auto Repair <br /> Garage Dubai!</p>
+                        <p>
+                          Thank you for choosing Car AID Auto Repair <br />{" "}
+                          Garage Dubai!
+                        </p>
                       </div>
 
                       <div
                         style={{
                           borderBottom: "3px solid #000",
                           paddingBottom: "10px",
-                          width:'45%'
+                          width: "45%",
                         }}
                       >
                         <div
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            gap:'100px'
+                            gap: "100px",
                           }}
                         >
                           <p>Subtotal:</p>
@@ -802,7 +823,8 @@ const shareOnWhatsApp = async () => {
                           </p>
                         </div>
 
-                        <div className="total"
+                        <div
+                          className="total"
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
