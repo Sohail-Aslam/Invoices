@@ -254,7 +254,7 @@ useEffect(() => {
       <header className="invoice-header">
         <Tilt options={defaultOptions}>
           <div className="company-header">
-            <img src="public/headerLogo (1).png" alt="Company Logo" />
+            <img src="src/public/headerLogo.webp" alt="Company Logo" />
             <h1 style={{ color: "white" }}>
               Car A I D Repair Service Garage Dubai
             </h1>
@@ -351,14 +351,14 @@ useEffect(() => {
       </Tilt>
 
       <div className="services-container ">
-        <button className="clear-new-btn" onClick={handleClearAll}>
-          <span className="plus">+</span>
-          <span className="text">Create New</span>
-        </button>
         <div
           className="service-input-container right-section"
           options={defaultOptions}
         >
+          <button className="clear-new-btn" onClick={handleClearAll}>
+            <span className="plus">+</span>
+            <span className="text">Create New</span>
+          </button>
           <Tilt className="service-row services" options={defaultOptions}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h2 className="sub-heading heading">Service Details</h2>
@@ -566,7 +566,7 @@ useEffect(() => {
           <div style={{ height: "70%", overflow: "auto" }}>
             <div className="invoice-preview" ref={targetRef}>
               <div className="invoice-container">
-                <img className="img2" src="public/Group83-1.png" alt="" />
+                <img className="img2" src="src/public/Invoice-top.png" alt="" />
 
                 <div
                   style={{
@@ -591,7 +591,7 @@ useEffect(() => {
                   <header className="invoice-preview-header">
                     <div className="header-left">
                       <div>
-                        <img src="public/2.png" alt="Company Logo" />
+                        <img src="src/public/headerLogo.webp" alt="Company Logo" style={{position:'relative', top:'55px'}} />
                         <h1>
                           CAR A I D AUTO MOBILE REPAIR GARAGE
                           <br /> SERVICE LLC
@@ -867,14 +867,14 @@ useEffect(() => {
                     </div>
                     <div className="service-image">
                       <img
-                        src="24-7Logo.png"
+                        src="src/public/24-7Logo.png"
                         alt="24/7 Emergency Services"
                         className="emergency-logo"
                       />
                     </div>
                   </div>
                 </footer>
-                <img className="img2" src="public/Group84-2.png" alt="" />
+                <img className="img2" src="src/public/Invoice-bottom.png" alt="" />
               </div>
               {/* </div> */}
             </div>
@@ -959,7 +959,14 @@ useEffect(() => {
             </div>
 
             {/* Main Button */}
-            <button className="fab" onClick={() => setMenuOpen(!menuOpen)}>
+            <button
+              className="fab"
+              style={{
+                background: menuOpen ? "#303642" : "white",
+                color: menuOpen ? "white" : "black",
+              }}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
               {menuOpen ? "✖" : "⚙"}
             </button>
           </div>

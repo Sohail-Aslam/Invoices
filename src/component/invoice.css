@@ -22,10 +22,12 @@
   align-items: center;
   justify-content: center;
   gap: 15px;
+  position: relative;
+  top: -32px;
 }
 
 .company-header img {
-  height: 60px;
+  height: 120px;
 }
 
 .company-header h1 {
@@ -283,7 +285,7 @@ input {
     width: 100px;
     height: 100px;
     color: #6a6e77;
-    background-image: url(../../public/images.png);
+    background-image: url(../public/PDF-logo.png);
     background-size: 100%;
     background-repeat: no-repeat;
     border-radius: 10px;
